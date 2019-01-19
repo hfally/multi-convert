@@ -62,14 +62,30 @@ To source your .bashrc, simply run:
     * -quality
     * -resize
     
-    You can read more on the `convert` tool by running:
+You can read more on the `convert` tool by running:
     
-    `$ convert -help`
-    
+`$ convert -help`
 That's it! 
 
 You can always get help through `$ multi-convert help`
 
+    
+## EXAMPLE
+
+* You can use this tool to resize your bulk images with just one simple command.
+
+    `$ multi-convert jpg -resize 1029x`
+
+* You can use this tool to reduce quality of images
+
+    `$ multi-convert jpg -quality 70%`
+
+* You can run multiple conversion commands once
+
+    `$ multi-convert jpg -resize 1029x -quality 70%`
+   
+
+This commands will not touch your original images, instead, they will create a new folder and store the converted ones there. The folder's naming structure is `multi-TIMESTANP`.
 
 ## Supported OS
 Ubuntu is the only supported distro for now, however, its likely it works on Debian too.
