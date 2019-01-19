@@ -5,7 +5,9 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/Apache-Virtualhost-red.svg" alt="Apache virtualhost">
+    <img alt="MIT" src="https://img.shields.io/badge/license-MIT-green.svg">
+    <img alt="multi-convert" src="https://img.shields.io/badge/Image-Active-green.svg">
+    <img alt="OS" src="https://img.shields.io/badge/os-Ubuntu-yellow.svg">
 </p>
 
 
