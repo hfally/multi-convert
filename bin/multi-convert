@@ -1,0 +1,85 @@
+#!/bin/bash -e
+
+# Used colors
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+
+# Text Transform
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+die () {
+    echo >&2 "$@"
+    exit 1
+}
+
+good () {
+    GREEN='\033[0;32m'
+    NC='\033[0m' # No color
+    echo -e "${GREEN}done${NC}"
+}
+
+alert () {
+    GREEN='\033[0;32m'
+    NC='\033[0m'
+
+    echo -e "$GREEN$@$NC"
+    exit 1
+}
+
+actionConvert () {
+    ext=$1
+    timeStamp=$(date +"%T")
+    newDir="multi-${timeStamp}"
+    argument=${@:2}
+
+    # Make new directory
+    echo -n "Creating directory $newDir... - "
+
+    mkdir $newDir
+
+    good
+
+    printf "\n"
+    printf "\n"
+
+    # Start Conversion
+    echo -e "${YELLOW}${bold}---STARTING CONVERSION----${normal}${NC}"
+
+    printf "\n"
+
+    for i in *.$ext
+        do
+            if [ -f $i ]; then
+                echo -n "Converting $i... - "
+
+                convert $argument $i "$newDir/$i"
+
+                good
+
+                printf "\n"
+            fi
+        done
+}
+
+actionHelp () {
+    year=$(date +"%Y")
+
+    printf "${YELLOW}Version:$NC multi-convert 1.0.0
+${YELLOW}Copyright:$NC © $YEAR Henry Falade (multi-convert)
+${YELLOW}Features:$NC convert
+${YELLOW}Usage:$NC multi-convert [file-extension (e.g jpg, png)...] [convert options (e.g -strip, -quality)...]
+
+Run: ${bold}convert -help$normal for convert options
+"
+}
+
+if [[ $# -eq 0 || $1 = 'help' ]]; then
+    actionHelp
+    exit
+else
+    actionConvert $@
+    exit
+fi
